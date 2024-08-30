@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>질량 에너지 등가원리 계산기</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+	<style>
+    textarea {
+    width: 100%;
+    height: 6.25em;
+    border: none;
+    resize: none;
+    height: 300px
+  }  
+
+  
+</style>
+<script type="text/x-mathjax-config">
+
+    MathJax.Hub.Config({
+    
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    
+    });
+    
+    </script>
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+</head>
+<body>
+<br><br>
+<div class="container">
+<h1>질량 에너지 등가원리 계산기($\ E=MC^2$)</h1>
+<p>입력된 질량의 질량결손을 여러단위로 표시합니다.</p>
+	<p>Mass: ($ Kg $)</p>
+    <input type="number" id="mass" placeholder="Mass(Kg)"></input><br>
+	<p>LightSpeed:</p>
+	<input type="number" id="c" value="299792458"></input>
+    <button onclick="calculateEnergy()">계산</button><br><br>
+    <textarea id="result" readonly placeholder="결과는 여기에 표시됩니다."></textarea><br>
+    <p>질량 에너지 등가원리는 아주 작은 질량도 엄청난 에너지로 바뀔 수 있고, <br>에너지 또한 질량으로 변환될 수 있다는 것을 의미하는 아인슈타인의 유명한 공식 $\ E=MC^2$ 로 표현되는 원리입니다.<br>이는 핵분열성, 핵융합성 물질에 적용될수 있습니다.</p>
+    <p>단위변환은 다음과 같이 할수 있습니다.: <br></p>
+    <p>J to KJ : $\ \frac{Jule}{1000}$<br><br>J to MJ : $\frac{Jule}{1e+6}$<br><br>KJ to KT : $\frac{KiloJule}{4.184e+9}$</p>
+    <p>MJ to MT : $\frac{MegaJule}{4.184e+9}$<br><br>KJ to Kcal : $\frac{KiloJule}{4.184}$</p>
+  </div>
+
+
+
+    <script>
+	function calculateEnergy() {
+
+  const cInput = document.getElementById('c');
+  const c = parseFloat(cInput.value);
+  const massInput = document.getElementById('mass');
+  const mass = parseFloat(massInput.value);
+  const energyJoule = mass * c * c;
+  const KiloJ = energyJoule/1000
+  const MegaJ = energyJoule/1e+6
+  const KiloT = KiloJ/4.184e+9
+  const MegaT = MegaJ/4.184e+9
+  const KiloCal = KiloJ/4.184
+  const resultElement = document.getElementById('result');
+
+  resultElement.textContent = 
+  'Joule:  ' + energyJoule + ' J \n' 
+  + 'KiloJoule:  ' + KiloJ + ' KJ \n'
+  + 'MegaJoule:  ' + MegaJ + ' MJ' + '\n\n'
+  + 'KiloTon:  ' + KiloT +' KT\n'
+  + 'MegaTon:  ' + MegaT + ' MT \n\n' 
+  + 'KiloCal:  ' + KiloCal +'Kcal'
+  
+  ;
+}
+
+	</script>
+    
+</body>
+</html>
